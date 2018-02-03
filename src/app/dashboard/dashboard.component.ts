@@ -1,11 +1,11 @@
-import { Component, OnInt } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styuleUrls: []
+  templateUrl: './dashboard.component.html'
+//  styuleUrls: []
 })
 
 export class DashboardComponent implements OnInt {
@@ -13,7 +13,7 @@ export class DashboardComponent implements OnInt {
 
   constructor(private heroService: HeroService) { }
 
-  ngOnInt() {
+  ngOnInit() {
     this.getHeroes();
   }
 
