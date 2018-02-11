@@ -6,13 +6,13 @@ import { HeroService } from '../hero.service';
 @Component({
   selector: 'app-heroes',
   templateUrl: './heroes.component.html',
-  styuleUrls: ['./heroes.component.css']
+  styleUrls: ['./heroes.component.css']
 })
 
 export class HeroComponent implements OnInit {
   heroes: Hero[];
   
-  constracto(private HeroService: HeroService) { }
+  constructor(private heroService: HeroService) { }
 
   ngOnInit() {
     this.getHeroes();
