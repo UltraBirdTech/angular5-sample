@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-//import { FormModule } from '@angular/forms';
-//import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
-//import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api-module';
-//import { InMemoryDataService } from './in-memory-data.service';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './in-memory-data.service';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -21,15 +21,15 @@ import { HeroService } from './hero.service';
 @NgModule({
   imports: [
     BrowserModule,
- //   FormsModule,
- //   AppRoutingModule,
- //   HttpClientModule,
- //   HttpClientInMemoryWebApiModule.forRoot(
- //     InMemoryDataService, { dateEncapsulation: false }
- //   )
+    FormsModule,
+    AppRoutingModule,
+    HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, { dataEncapsulation: false }
+    )
   ],
   declarations: [
- //   AppComponent,
+   AppComponent,
    DashboardComponent,
  //   HeroesComponent, 
  //   HeroDetailComponent, 
@@ -37,7 +37,7 @@ import { HeroService } from './hero.service';
  //   HeroSearchComponent
    ],
 //  providers: [ HeroService, MessageService ],
-  providers: [ ],
+  providers: [ HeroService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
