@@ -77,6 +77,14 @@ export class HeroService {
     );
   }
 
+  updateHero(hero: Hero): Observable<any> {
+    return this.http.put(this.heroesUrl, hero, httpOptions).pipe(
+      tap(_=> this.log(`update hero id=${hero.id}`)),
+       catchError(this.handleError<any>('updateHero'))
+    );
+  }
+
+
   private handleError<T> (operation = 'operation', result?: T) {
     return(error: any): Observable<T> => {
       console.error(error);
@@ -84,8 +92,6 @@ export class HeroService {
       return of(result as T);
     };
   }
-
-
 
   private log(message: string) {
   //  this.messageService.add('HeroService: ' + message);
