@@ -1,4 +1,4 @@
-import { Injectabel } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -30,15 +30,15 @@ export class HeroService {
   }
 
   getHeroNo404<Data>(id: number): Observable<Hero> {
-    const Url = `${this.heroesUrl}/?id=${id}`;
+    const url = `${this.heroesUrl}/?id=${id}`;
     return this.http.get<Hero[]>(url)
       .pipe(
         map(heroes => heroes[0]),
         tap(h => {
           const outcome = h ? `fetched` : `did not found`;
           this.log(`${outcome} hero id=${id}`);
-        });
-        catchError(this.handelError<Hero>(`getHero id=${id}`))
+        }),
+        catchError(this.handleError<Hero>(`getHero id=${id}`))
       );
    }
 
@@ -56,9 +56,21 @@ export class HeroService {
     }
     return this.http.get<Hero[]>(`api/heroes/?name=${term}`).pipe(
       tap(_ => this.log(`fetch heroes matching "${term}"`)),
-      catchError(this.handleError<Hero[]>('searchHeroes', [])
+      catchError(this.handleError<Hero[]>('searchHeroes', []))
     );
+  }
+
+  private handleError<T> (operation = 'operation', result?: T) {
+    return(error: any): Observable<T> => {
+      console.error(error);
+      this.log(`${operation} failed: ${error.message}`);
+      return of(result as T);
+    };
   }
 
 
 
+  private log(message: string) {
+  //  this.messageService.add('HeroService: ' + message);
+  }
+}
