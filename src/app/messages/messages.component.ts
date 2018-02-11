@@ -4,9 +4,9 @@ import { MessageService } from '../message.service';
 @Component({
   selector: 'app-messages',
   templateUrl: './messages.component.html',
-  styleUrls: ['./message.component.css']
+  styleUrls: []
 })
-export class MessagesComponnet implements OnInit {
+export class MessagesComponent implements OnInit {
   constructor(public messageService: MessageService) {}
 
   ngOnInit() {
